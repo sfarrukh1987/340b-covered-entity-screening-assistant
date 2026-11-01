@@ -2,6 +2,12 @@
 
 This project supports source-linked research on up to 10 New York health-center candidates using user-selected HRSA OPAIS records and saved service pages from official organization websites. Human review is required before any action. This repository currently contains the Session 6 unit tests for A1 Parse HTML; it does not implement the complete screening workflow.
 
+## Wire diagram
+
+A1 Parse HTML converts saved official HTML to text after D1 checks the input records and before D2 extracts service evidence in the planned screening workflow.
+
+![Workflow wire diagram](docs/wire_diagram.png)
+
 ## Protocol input and output
 
 A1 uses Beautiful Soup through this exact interface:
