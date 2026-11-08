@@ -1,5 +1,7 @@
 # 340B Covered Entity Screening Assistant
 
+[![tests](https://github.com/sfarrukh1987/340b-covered-entity-screening-assistant/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/sfarrukh1987/340b-covered-entity-screening-assistant/actions/workflows/tests.yml)
+
 This project supports source-linked research on up to 10 New York health-center candidates using user-selected HRSA OPAIS records and saved service pages from official organization websites. Human review is required before any action. This repository currently contains the Session 6 unit tests for A1 Parse HTML; it does not implement the complete screening workflow.
 
 ## Wire diagram
