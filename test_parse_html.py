@@ -116,3 +116,9 @@ def test_input_types(bad_input):
     # its public documentation does not promise a universal exception type.
     with pytest.raises(TypeError):
         BeautifulSoup(bad_input, "html.parser").get_text(" ", strip=True)
+
+
+def test_service_list():
+    html = "<h2>Services</h2><ul><li>Primary care</li><li>Dental care</li></ul>"
+    out = BeautifulSoup(html, "html.parser").get_text(" ", strip=True)
+    assert out == "Services Primary care Dental care"
