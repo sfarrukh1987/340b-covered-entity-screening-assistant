@@ -2,7 +2,7 @@
 
 [![tests](https://github.com/sfarrukh1987/340b-covered-entity-screening-assistant/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/sfarrukh1987/340b-covered-entity-screening-assistant/actions/workflows/tests.yml)
 
-This project supports source-linked research on up to 10 New York health-center candidates using user-selected HRSA OPAIS records and saved service pages from official organization websites. Human review is required before any action. This repository currently contains the Session 6 unit tests for A1 Parse HTML; it does not implement the complete screening workflow.
+This project supports source-linked research on up to 10 New York health-center candidates using user-selected HRSA OPAIS records and saved service pages from official organization websites. Human review is required before any action. This repository contains the unit tests for A1 Parse HTML; it does not implement the complete screening workflow.
 
 ## Wire diagram
 
@@ -22,7 +22,7 @@ BeautifulSoup(html, "html.parser").get_text(" ", strip=True)
 - Output: extracted text as a Python `str`, which may be empty.
 - The parser is the Python standard library `html.parser`; text nodes are joined with one space and surrounding whitespace is stripped.
 
-`test_parse_html.py` and `requirements.txt` are unchanged from the Session 6 submission. All test inputs are invented. The tests make no network requests or LLM calls and require no API key.
+The 19 original Session 6 test cases and pinned dependencies are unchanged. Session 9 adds one test for an HTML service list. All test inputs are invented. The tests make no network requests or LLM calls and require no API key.
 
 ## Setup and tests
 
@@ -51,7 +51,7 @@ python -m pip install -r requirements.txt
 pytest -v
 ```
 
-The suite contains 19 test cases covering ordinary HTML, nested text, whitespace, entities, excluded script/style/template/comment content, empty inputs, plain text, malformed HTML, Unicode, a long page, JavaScript-only content, retained navigation, and invalid input types.
+The suite contains 20 test cases covering ordinary HTML, service lists, nested text, whitespace, entities, excluded script/style/template/comment content, empty inputs, plain text, malformed HTML, Unicode, a long page, JavaScript-only content, retained navigation, and invalid input types.
 
 ## Known limitations
 

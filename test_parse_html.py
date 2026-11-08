@@ -121,4 +121,4 @@ def test_input_types(bad_input):
 def test_service_list():
     html = "<h2>Services</h2><ul><li>Primary care</li><li>Dental care</li></ul>"
     out = BeautifulSoup(html, "html.parser").get_text(" ", strip=True)
-    assert out == "Services Primary care"  # Deliberately missing Dental care.
+    assert out == "Services Primary care Dental care"
