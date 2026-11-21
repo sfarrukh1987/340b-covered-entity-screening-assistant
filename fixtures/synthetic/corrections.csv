@@ -1,0 +1,2 @@
+candidate_id,name,state,city,ZIP,source_url,registry_date,page_date,ce_id,registry_status,source_confirmed,html_file
+SYN-02,Example River Center,NY,Albany,12206,https://river.example/services,2026-11-16,2026-11-20,EXAMPLE-002,active,true,river-fixed.html
