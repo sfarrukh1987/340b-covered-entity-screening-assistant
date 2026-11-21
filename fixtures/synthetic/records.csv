@@ -1,0 +1,7 @@
+candidate_id,name,state,city,ZIP,source_url,registry_date,page_date,ce_id,registry_status,source_confirmed,html_file
+SYN-01,Example Harbor Center,NY,Albany,12207,https://harbor.example/services,2026-11-16,2026-11-18,EXAMPLE-001,active,true,harbor.html
+SYN-02,Example River Center,NY,Albany,12206,https://river.example/services,2026-11-16,2026-11-18,EXAMPLE-002,active,true,river.html
+SYN-03,Example North Center,NY,Troy,12180,https://north.example/services,2026-11-16,2026-11-18,EXAMPLE-003,active,true,north.html
+SYN-04,Example Hill Center,NY,Albany,12208,https://hill.example/services,2026-10-15,2026-11-18,EXAMPLE-004,active,true,hill.html
+SYN-05,Example Grove Center,NY,Albany,12210,https://grove.example/services,,2026-11-18,,unknown,true,grove.html
+SYN-06,Example Maple Center,NY,Albany,12207,https://maple.example/services,2026-11-16,2026-11-18,EXAMPLE-006,inactive,true,maple.html

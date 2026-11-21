@@ -1,61 +1,39 @@
 # 340B Covered Entity Screening Assistant
 
-[![tests](https://github.com/sfarrukh1987/340b-covered-entity-screening-assistant/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/sfarrukh1987/340b-covered-entity-screening-assistant/actions/workflows/tests.yml)
+[![main tests](https://github.com/sfarrukh1987/340b-covered-entity-screening-assistant/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/sfarrukh1987/340b-covered-entity-screening-assistant/actions/workflows/tests.yml)
 
-This project supports source-linked research on up to 10 New York health-center candidates using user-selected HRSA OPAIS records and saved service pages from official organization websites. Human review is required before any action. This repository contains the unit tests for A1 Parse HTML; it does not implement the complete screening workflow.
+This course rough draft helps a reviewer assemble a source-linked research shortlist for at most 10 manually selected New York health-center candidates. The intended inputs are saved public HRSA OPAIS records and saved official service pages. The executable demo accepts synthetic records and `.example` source labels only. It does not crawl, send outreach, decide eligibility or contract fit, or write to a pharmacy system. A person checks the original sources before using any result.
 
-## Wire diagram
+## Setup and run
 
-A1 Parse HTML converts saved official HTML to text after D1 checks the input records and before D2 extracts service evidence in the planned screening workflow.
-
-![Workflow wire diagram](docs/wire_diagram.png)
-
-## Protocol input and output
-
-A1 uses Beautiful Soup through this exact interface:
-
-```python
-BeautifulSoup(html, "html.parser").get_text(" ", strip=True)
-```
-
-- Input: saved HTML as a Python `str`.
-- Output: extracted text as a Python `str`, which may be empty.
-- The parser is the Python standard library `html.parser`; text nodes are joined with one space and surrounding whitespace is stripped.
-
-The 19 original Session 6 test cases and pinned dependencies are unchanged. Session 9 adds one test for an HTML service list. All test inputs are invented. The tests make no network requests or LLM calls and require no API key.
-
-## Setup and tests
-
-Use Python 3.12.14, the version used for the Session 6 submission.
+Use Python 3.12 (verified with 3.12.14). From the repository root, create a virtual environment and activate it:
 
 ```sh
 python -m venv .venv
-```
-
-Activate the environment in Windows PowerShell:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-Or activate it on macOS/Linux:
-
-```sh
+# macOS/Linux:
 source .venv/bin/activate
 ```
 
-Install the pinned dependencies and run the tests:
+On Windows PowerShell, activate it with `.\.venv\Scripts\Activate.ps1`.
 
 ```sh
 python -m pip install -r requirements.txt
-pytest -v
 ```
 
-The suite contains 20 test cases covering ordinary HTML, service lists, nested text, whitespace, entities, excluded script/style/template/comment content, empty inputs, plain text, malformed HTML, Unicode, a long page, JavaScript-only content, retained navigation, and invalid input types.
+Then run the entire demonstration with one command:
 
-## Known limitations
+```sh
+python -m screening
+```
 
-Beautiful Soup does not execute JavaScript, so a page whose service content is loaded only by JavaScript can produce empty text. Navigation is retained and must be reviewed. Parsing text does not verify the accuracy or completeness of website claims, link a website to an OPAIS record, or establish 340B eligibility or contracting willingness. Exception behavior and other observed details are checked against the pinned package versions.
+The bundled six invented candidates produce **2 review, 2 verify, and 2 hold** results. `outputs/audit.html` records inputs, attempts, source quotes, decisions, and errors. `outputs/shortlist.csv` contains every candidate, including those on hold or awaiting verification. One candidate's first page has no usable service text; the second saved page is used and both attempts remain visible. The reference date is in the fixture config so the expected results do not change with the calendar.
 
-In the planned workflow, saved official HTML is linked manually to a separate registry record and checked before parsing. One human-supplied correction may pass through input validation and parsing again; unresolved or missing evidence remains marked `verify`. The full workflow includes additional components that are not implemented by this test suite.
+Run the tests with `python -m pytest -v`. GitHub Actions runs the tests and the synthetic demonstration on pushes and pull requests, with the existing weekly schedule and manual trigger. The 20 earlier A1 tests are unchanged. The new suite tests the input, model reply, evidence, explanation, reporting, and orchestration contracts. No expected failures are needed. After installation the default command and test suite make no network or live model calls.
 
+## Model boundary and limits
+
+The two model steps are present. The default backend returns synthetic JSON for them so the demo and CI run without keys or a model server. Optionally, configure a local Ollama server with an already installed **local** model, then use `python -m screening --ollama-model YOUR_LOCAL_MODEL`. The adapter connects to loopback only. The request path is unit tested with a mock; the verified demo uses the synthetic backend. The Session 10 MCP service remains a future option.
+
+A1 retains the Session 6 Beautiful Soup behavior. The workflow separately omits navigation from the service text used for evidence. It cannot render JavaScript or judge all the ways a real page describes a service; the demo only recognizes its narrow fixture wording. A missing quote or page is a prompt for verification, never proof a service is absent. Keep real records and credentials out of the repo and fixtures. Generated outputs and common local data/key paths are ignored.
+
+- [Current wire diagram](docs/workflow.md) · [Workflow instructions](WORKFLOW.md) · [Original Session 5 wire diagram](docs/wire_diagram.png)
